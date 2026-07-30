@@ -34,6 +34,15 @@ function calculate_ipk($total_mutu_all, $total_sks_all) {
     return round($total_mutu_all / $total_sks_all, 2);
 }
 
+function get_current_dosen(mysqli $mysqli, int $userId): ?array {
+    $stmt = $mysqli->prepare('SELECT id_dosen, nama_dosen FROM dosen WHERE id_user = ? LIMIT 1');
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row ?: null;
+}
+
 // CSRF helpers
 function csrf_token() {
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();

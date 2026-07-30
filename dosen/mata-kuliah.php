@@ -20,7 +20,7 @@ require_once __DIR__ . '/../includes/header.php';
     <?php else: ?>
       <table class="table table-striped table-responsive">
         <thead>
-          <tr><th>Mata Kuliah</th><th>Kode</th><th>SKS</th><th>Semester</th><th>Tahun Akademik</th><th>Kelas</th><th>Hari</th><th>Jam</th><th>Ruangan</th></tr>
+          <tr><th>Mata Kuliah</th><th>Kode</th><th>SKS</th><th>Semester</th><th>Tahun Akademik</th><th>Kelas</th><th>Hari</th><th>Jam</th><th>Ruangan</th><th>Aksi</th></tr>
         </thead>
         <tbody>
         <?php
@@ -45,6 +45,10 @@ require_once __DIR__ . '/../includes/header.php';
             <td><?php echo e($row['hari']); ?></td>
             <td><?php echo e(substr($row['jam_mulai'], 0, 5) . ' - ' . substr($row['jam_selesai'], 0, 5)); ?></td>
             <td><?php echo e($row['ruangan']); ?></td>
+            <td>
+              <a href="mahasiswa.php?jadwal=<?php echo $row['id_jadwal']; ?>" class="btn btn-sm btn-outline-primary">Mahasiswa</a>
+              <a href="nilai.php?jadwal=<?php echo $row['id_jadwal']; ?>" class="btn btn-sm btn-outline-success">Nilai</a>
+            </td>
           </tr>
         <?php endwhile; ?>
         </tbody>
