@@ -48,3 +48,4 @@ Menyimpan nilai tugas, UTS, UAS, nilai akhir, huruf, dan bobot.
 - Data mata kuliah dipisahkan dari jadwal.
 - Data KRS dipisahkan antara header dan detail.
 - Data nilai disimpan terpisah agar tidak menduplikasi informasi KRS.
+- Tahun akademik dibatasi unik pada kombinasi `tahun_akademik` dan `semester`, bukan hanya tahun saja, karena satu tahun akademik memiliki dua semester.

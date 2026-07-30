@@ -59,9 +59,10 @@ CREATE TABLE mata_kuliah (
 
 CREATE TABLE tahun_akademik (
     id_tahun_akademik INT AUTO_INCREMENT PRIMARY KEY,
-    tahun_akademik VARCHAR(20) NOT NULL UNIQUE,
+    tahun_akademik VARCHAR(20) NOT NULL,
     semester ENUM('ganjil', 'genap') NOT NULL,
-    status ENUM('aktif', 'nonaktif') NOT NULL DEFAULT 'nonaktif'
+    status ENUM('aktif', 'nonaktif') NOT NULL DEFAULT 'nonaktif',
+    UNIQUE KEY uq_tahun_semester (tahun_akademik, semester)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE jadwal_kuliah (

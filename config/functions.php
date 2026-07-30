@@ -6,6 +6,23 @@ function e($str) {
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }
 
+function app_base_url() {
+    $scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+    $segments = array_values(array_filter(explode('/', trim($scriptName, '/'))));
+
+    if (count($segments) <= 1 && isset($segments[0]) && str_ends_with($segments[0], '.php')) {
+        return '';
+    }
+
+    return $segments ? '/' . $segments[0] : '';
+}
+
+function app_url($path = '') {
+    $base = app_base_url();
+    $path = ltrim($path, '/');
+    return $base . ($path !== '' ? '/' . $path : '');
+}
+
 function calculate_final_score($tugas, $uts, $uas) {
     // 30% tugas, 30% UTS, 40% UAS
     $final = ($tugas * 0.3) + ($uts * 0.3) + ($uas * 0.4);

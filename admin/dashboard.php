@@ -9,6 +9,6 @@ require_once __DIR__ . '/../includes/header.php';
     <div class="col-10 mt-4">
         <h1>Dashboard Admin</h1>
         <p>Selamat datang, <?php echo e($_SESSION['user']['username']); ?></p>
-        <a href="/logout.php" class="btn btn-danger">Logout</a>
+        <a href="<?php echo e(app_url('logout.php')); ?>" class="btn btn-danger">Logout</a>
     </div>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

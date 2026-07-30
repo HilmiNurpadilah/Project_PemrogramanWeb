@@ -45,8 +45,8 @@ require_once __DIR__ . '/../includes/header.php';
                 </div>
             </div>
         </div>
-        <a href="/dosen/mata-kuliah.php" class="btn btn-outline-primary">Lihat Mata Kuliah Diampu</a>
-        <a href="/logout.php" class="btn btn-danger ms-2">Logout</a>
+        <a href="<?php echo e(app_url('dosen/mata-kuliah.php')); ?>" class="btn btn-outline-primary">Lihat Mata Kuliah Diampu</a>
+        <a href="<?php echo e(app_url('logout.php')); ?>" class="btn btn-danger ms-2">Logout</a>
     </div>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
 

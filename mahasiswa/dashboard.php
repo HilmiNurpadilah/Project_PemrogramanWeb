@@ -73,9 +73,9 @@ require_once __DIR__ . '/../includes/header.php';
       <div class="alert alert-warning">Profil mahasiswa belum ditemukan.</div>
     <?php endif; ?>
 
-    <a href="/mahasiswa/isi-krs.php" class="btn btn-outline-primary">Isi KRS</a>
-    <a href="/mahasiswa/krs.php" class="btn btn-outline-success ms-2">Lihat KRS Saya</a>
-    <a href="/logout.php" class="btn btn-danger ms-2">Logout</a>
+    <a href="<?php echo e(app_url('mahasiswa/isi-krs.php')); ?>" class="btn btn-outline-primary">Isi KRS</a>
+    <a href="<?php echo e(app_url('mahasiswa/krs.php')); ?>" class="btn btn-outline-success ms-2">Lihat KRS Saya</a>
+    <a href="<?php echo e(app_url('logout.php')); ?>" class="btn btn-danger ms-2">Logout</a>
   </div>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
 <?php
@@ -89,6 +89,6 @@ require 'includes/header.php';
     <div class="col-10 mt-4">
         <h1>Dashboard Mahasiswa</h1>
         <p>Selamat datang, <?php echo e($_SESSION['user']['username']); ?></p>
-        <a href="/logout.php" class="btn btn-danger">Logout</a>
+        <a href="<?php echo e(app_url('logout.php')); ?>" class="btn btn-danger">Logout</a>
     </div>
 <?php require 'includes/footer.php'; ?>
