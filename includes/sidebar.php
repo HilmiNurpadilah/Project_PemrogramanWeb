@@ -10,6 +10,7 @@ $role = $_SESSION['user']['role'] ?? null;
       <li class="nav-item"><a class="nav-link" href="/admin/dashboard.php">Dashboard</a></li>
       <li class="nav-item"><a class="nav-link" href="#">Mahasiswa</a></li>
       <li class="nav-item"><a class="nav-link" href="#">Dosen</a></li>
+      <li class="nav-item"><a class="nav-link" href="/admin/mata-kuliah/index.php">Mata Kuliah</a></li>
     <?php elseif ($role === 'dosen'): ?>
       <li class="nav-item"><a class="nav-link" href="/dosen/dashboard.php">Dashboard</a></li>
       <li class="nav-item"><a class="nav-link" href="#">Mata Kuliah</a></li>
