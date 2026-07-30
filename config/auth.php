@@ -2,6 +2,7 @@
 // config/auth.php
 session_start();
 require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/functions.php';
 
 function is_logged_in() {
     return isset($_SESSION['user']);
