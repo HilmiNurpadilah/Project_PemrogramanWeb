@@ -35,7 +35,7 @@ require_once __DIR__ . '/../includes/header.php';
             <p class="card-text mb-1">Tanggal: <?php echo e($krs['tanggal_pengisian']); ?></p>
             <p class="card-text mb-1">Status: <?php echo e($krs['status_krs']); ?></p>
             <?php
-            $stmt3 = $mysqli->prepare('SELECT mk.nama_mata_kuliah, mk.sks, jk.hari, jk.jam_mulai, jk.jam_selesai, jk.kelas, d.nama_dosen
+            $stmt3 = $mysqli->prepare('SELECT dk.id_jadwal, mk.nama_mata_kuliah, mk.sks, jk.hari, jk.jam_mulai, jk.jam_selesai, jk.kelas, d.nama_dosen
                                        FROM detail_krs dk
                                        JOIN jadwal_kuliah jk ON dk.id_jadwal = jk.id_jadwal
                                        JOIN mata_kuliah mk ON jk.id_mata_kuliah = mk.id_mata_kuliah
@@ -47,7 +47,7 @@ require_once __DIR__ . '/../includes/header.php';
             $totalSks = 0;
             ?>
             <table class="table table-sm table-bordered mt-3">
-              <thead><tr><th>Mata Kuliah</th><th>SKS</th><th>Dosen</th><th>Jadwal</th></tr></thead>
+              <thead><tr><th>Mata Kuliah</th><th>SKS</th><th>Dosen</th><th>Jadwal</th><th>Aksi</th></tr></thead>
               <tbody>
                 <?php while ($row = $detail->fetch_assoc()): $totalSks += (int) $row['sks']; ?>
                   <tr>
@@ -55,6 +55,18 @@ require_once __DIR__ . '/../includes/header.php';
                     <td><?php echo e($row['sks']); ?></td>
                     <td><?php echo e($row['nama_dosen']); ?></td>
                     <td><?php echo e($row['hari'] . ' ' . substr($row['jam_mulai'], 0, 5) . '-' . substr($row['jam_selesai'], 0, 5) . ' / ' . $row['kelas']); ?></td>
+                    <td>
+                      <?php if ($krs['status_krs'] !== 'dikunci'): ?>
+                        <form action="hapus-krs.php" method="post" onsubmit="return confirm('Hapus mata kuliah ini dari KRS?');" style="display:inline-block;">
+                          <?php echo csrf_field(); ?>
+                          <input type="hidden" name="id_krs" value="<?php echo e($krs['id_krs']); ?>">
+                          <input type="hidden" name="jadwal" value="<?php echo e($row['id_jadwal'] ?? ''); ?>">
+                          <button class="btn btn-sm btn-danger">Hapus</button>
+                        </form>
+                      <?php else: ?>
+                        <span class="text-muted">Terkunci</span>
+                      <?php endif; ?>
+                    </td>
                   </tr>
                 <?php endwhile; ?>
               </tbody>
@@ -66,3 +78,4 @@ require_once __DIR__ . '/../includes/header.php';
     <?php endif; ?>
   </div>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
+

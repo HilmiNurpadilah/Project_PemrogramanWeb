@@ -48,15 +48,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $selectedSks = 0;
             if ($uniqueSelected) {
-                $placeholders = implode(',', array_fill(0, count($uniqueSelected), '?'));
-                $types = str_repeat('i', count($uniqueSelected));
-                $sql = "SELECT COALESCE(SUM(mk.sks), 0) AS total_sks FROM jadwal_kuliah jk JOIN mata_kuliah mk ON jk.id_mata_kuliah = mk.id_mata_kuliah WHERE jk.id_jadwal IN ($placeholders) AND jk.id_tahun_akademik = ?";
-                $stmt4 = $mysqli->prepare($sql);
-                $bindValues = array_merge($uniqueSelected, [(int) $activeTa['id_tahun_akademik']]);
-                $types .= 'i';
-                $stmt4->bind_param($types, ...$bindValues);
+              $stmt4 = $mysqli->prepare('SELECT COALESCE(mk.sks, 0) AS sks
+                             FROM jadwal_kuliah jk
+                             JOIN mata_kuliah mk ON jk.id_mata_kuliah = mk.id_mata_kuliah
+                             WHERE jk.id_jadwal = ? AND jk.id_tahun_akademik = ? LIMIT 1');
+              foreach ($uniqueSelected as $jadwalId) {
+                $stmt4->bind_param('ii', $jadwalId, $activeTa['id_tahun_akademik']);
                 $stmt4->execute();
-                $selectedSks = (int) ($stmt4->get_result()->fetch_assoc()['total_sks'] ?? 0);
+                $selectedSks += (int) ($stmt4->get_result()->fetch_assoc()['sks'] ?? 0);
+              }
             }
 
             if (($currentTotal + $selectedSks) > $maxSks) {
