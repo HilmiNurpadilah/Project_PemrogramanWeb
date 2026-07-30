@@ -72,6 +72,13 @@ require_once __DIR__ . '/../includes/header.php';
               </tbody>
             </table>
             <strong>Total SKS: <?php echo e($totalSks); ?></strong>
+            <?php if ($krs['status_krs'] !== 'dikunci' && $totalSks > 0): ?>
+              <form action="kunci-krs.php" method="post" class="mt-3" onsubmit="return confirm('Kunci KRS ini sekarang? Setelah dikunci, mata kuliah tidak bisa dihapus.');">
+                <?php echo csrf_field(); ?>
+                <input type="hidden" name="id_krs" value="<?php echo e($krs['id_krs']); ?>">
+                <button class="btn btn-success">Kunci KRS</button>
+              </form>
+            <?php endif; ?>
           </div>
         </div>
       <?php endwhile; ?>
