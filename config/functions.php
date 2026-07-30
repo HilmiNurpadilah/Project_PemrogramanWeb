@@ -43,6 +43,15 @@ function get_current_dosen(mysqli $mysqli, int $userId): ?array {
     return $row ?: null;
 }
 
+function get_current_mahasiswa(mysqli $mysqli, int $userId): ?array {
+    $stmt = $mysqli->prepare('SELECT id_mahasiswa, nim, nama_mahasiswa, program_studi, angkatan FROM mahasiswa WHERE id_user = ? LIMIT 1');
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row ?: null;
+}
+
 // CSRF helpers
 function csrf_token() {
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
