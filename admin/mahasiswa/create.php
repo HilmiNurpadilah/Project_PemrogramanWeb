@@ -39,10 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-require __DIR__ . '/../../includes/header.php';
+require_once __DIR__ . '/../../includes/header.php';
 ?>
   <div class="col-2">
-    <?php require __DIR__ . '/../includes/sidebar.php'; ?>
+    <?php require_once __DIR__ . '/../../includes/sidebar.php'; ?>
   </div>
   <div class="col-10 mt-4">
     <h2>Tambah Mahasiswa</h2>
@@ -79,4 +79,4 @@ require __DIR__ . '/../../includes/header.php';
       <button class="btn btn-primary">Simpan</button>
     </form>
   </div>
-<?php require __DIR__ . '/../../includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../../includes/footer.php'; ?>
