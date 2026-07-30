@@ -18,7 +18,8 @@ $role = $_SESSION['user']['role'] ?? null;
       <li class="nav-item"><a class="nav-link" href="/dosen/mata-kuliah.php">Mata Kuliah Diampu</a></li>
     <?php elseif ($role === 'mahasiswa'): ?>
       <li class="nav-item"><a class="nav-link" href="/mahasiswa/dashboard.php">Dashboard</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Isi KRS</a></li>
+      <li class="nav-item"><a class="nav-link" href="/mahasiswa/isi-krs.php">Isi KRS</a></li>
+      <li class="nav-item"><a class="nav-link" href="/mahasiswa/krs.php">KRS Saya</a></li>
     <?php endif; ?>
   </ul>
 </div>
